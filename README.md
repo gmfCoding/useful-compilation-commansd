@@ -38,3 +38,5 @@ $DELETE */
 
 Explanation:
 The `remove_uncom` user defined shell function/command removes all lines that have $DELETE, so if you place this on the lines where you have the begin/end comment characters than when we use `cc_uncom <file_name>` it will remove those lines, then cc/gcc/clang will now read those files and those comments will be gone.
+
+View declared user defined functions/commands with `declare -f`
