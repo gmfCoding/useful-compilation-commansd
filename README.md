@@ -1,5 +1,47 @@
 # useful-compilation-commansd
 
+Automation of 42 exercise compilation.
+
+Auto un-comment and auto compile/run:
+Comment out your main function like:
+
+```c
+/* DELETE_ME42
+#include <stdio.h>
+// The headers your exercise functions use should not be contained here, move them out.
+DELETE_ME42 */
+
+/* DELETE_ME42
+void main(void)
+{
+  // Testing code
+}
+DELETE_ME42 */
+```
+
+To automatically remove these lines for a given file you can use:
+
+`sed -i '' '/DELETE_ME42/d' example.c`
+
+`-i` signifies apply to file, MACOS/BSD requires the double single quotes, this will overwrite your file, BE CAREFUL, make sure you are fully git added & commited first.
+
+The second argument says delete the line if it contains 'DELETE_ME42', this is the one that removes those lines.
+example.c is the file.
+
+
+If you wanted to apply this to all exercises at once in one command use
+
+`find ex**/*.c -type f -exec sed -i '' '/DELETE_ME42/d' {} \;`
+This will run the sed command for each found .c file in each of the exercise directories.
+
+You can then compile your exerecises with:
+
+`find ex**/*.c -type f -exec cc -Werror -Wall -Wextra {} -o {}.o \;`
+
+Then you can auto run each exercise with:
+
+`find ex**/*.o -type f -exec {} && pwd \;`
+
 
 compile and run norminette
 ```
