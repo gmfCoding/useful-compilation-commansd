@@ -86,8 +86,20 @@ View declared user defined functions/commands with `declare -f`
 Codescan searches all your code for a phrase
 
 ```
-codescan() {find . -type f -name "*.[hc]" -exec grep -I -H -n $1 {} \;}
+codescan() 
+{
+  find . -type f -name "*.[hc]" -exec grep -I -H -n $1 {} \;
+}
 ```
+Usage:
+
+`codescan <phrase>`
+
+Example:
+
+`codescan atoi`
+
+searches for all uses of `atoi` in all c and header files
 
 Explanation:
 uses find to search for files that end with 'h' or 'c' extensions, then runs grep on each of those files
