@@ -1,5 +1,34 @@
 # useful-compilation-commansd
 
+Codescan: searches all your code for a phrase
+
+Usage:
+
+`codescan <phrase>`
+
+Example:
+
+`codescan atoi`
+
+searches for all uses of `atoi` in all c and header files
+
+```
+codescan() 
+{
+  find . -type f -name "*.[hc]" -exec grep -I -H -n $1 {} \;
+}
+```
+
+Explanation:
+uses find to search for files that end with 'h' or 'c' extensions, then runs grep on each of those files
+`-I` means don't look in binary files
+`-H` means output file name with
+`-n` means output the line number
+`$1` is the arg from calling codescan, it is the phrase
+`{}` is the file name that find command subsitutes
+`\;` is the end of the command
+
+## Automation
 Automation of 42 exercise compilation.
 
 Auto un-comment and auto compile/run:
@@ -82,30 +111,3 @@ Explanation:
 The `remove_uncom` user defined shell function/command removes all lines that have $DELETE, so if you place this on the lines where you have the begin/end comment characters than when we use `cc_uncom <file_name>` it will remove those lines, then cc/gcc/clang will now read those files and those comments will be gone.
 
 View declared user defined functions/commands with `declare -f`
-
-Codescan searches all your code for a phrase
-
-```
-codescan() 
-{
-  find . -type f -name "*.[hc]" -exec grep -I -H -n $1 {} \;
-}
-```
-Usage:
-
-`codescan <phrase>`
-
-Example:
-
-`codescan atoi`
-
-searches for all uses of `atoi` in all c and header files
-
-Explanation:
-uses find to search for files that end with 'h' or 'c' extensions, then runs grep on each of those files
-`-I` means don't look in binary files
-`-H` means output file name with
-`-n` means output the line number
-`$1` is the arg from calling codescan, it is the phrase
-`{}` is the file name that find command subsitutes
-`\;` is the end of the command
